@@ -3,13 +3,43 @@
     <div class="card">
         <div class="card-header version-header">
             <h5 class="mb-0">
+                <div class="version-ico {{getVersionClass}}">
+                    <i class="fas fa-code-branch"></i>
+                </div>
                 <button class="btn version-title" data-toggle="collapse" data-target="#v{{this._id}}">
-                    <i class="fas fa-code-branch"></i> Par <b>{{getUsername userId}}</b>, le {{humanDate this.date}}{{#if last}} (plus récente){{/if}}&nbsp;
-                    <span class="badge badge-success">{{getNbAccepted}}</span>
-                    <span class="badge badge-danger">{{getNbRefused}}</span>
-                    <span class="badge badge-primary">{{getNbWaiting}}</span>
-                    <span class="badge badge-secondary">{{getNbNotSeen}}</span>
-                    <span class="badge badge-info">{{getNbComment}}</span>
+                    <span class="ml-3">
+                        <i class="fas fa-user"></i>&nbsp;<b>{{getUsername userId}}</b>
+                        <i class="far fa-calendar-alt ml-2"></i>&nbsp;{{CalendarDate this.date}}
+                        <i class="fas fa-clock ml-2"></i>&nbsp;{{WatchDate this.date}}
+                    </span>
+                    {{#if last}} (plus récente){{/if}}
+                    <span class="text-right float-right mr-2 version-resume">
+                            {{#if getNbAccepted}}
+                                <span class="badge badge-success" data-toggle="tooltip" title="Approuvé par {{getNbAccepted}} utilisateurs">
+                                    <i class="fas fa-check-circle"></i>&nbsp;{{getNbAccepted}}
+                                </span>
+                            {{/if}}
+                            {{#if getNbRefused}}
+                                <span class="badge badge-danger" data-toggle="tooltip" title="Refusé par {{getNbRefused}} utilisateurs">
+                                    <i class="fas fa-times-circle"></i>&nbsp;{{getNbRefused}}
+                                </span>
+                            {{/if}}
+                            {{#if getNbWaiting}}
+                                <span class="badge badge-primary" data-toggle="tooltip" title="{{getNbWaiting}} utilisateurs n'ont pas voté">
+                                    <i class="far fa-hourglass"></i>&nbsp;{{getNbWaiting}}
+                                </span>
+                            {{/if}}
+                            {{#if getNbNotSeen}}
+                                <span class="badge badge-secondary" data-toggle="tooltip" title="{{getNbNotSeen}} utilisateurs n'ont pas vu cette version">
+                                    <i class="far fa-eye-slash"></i>&nbsp;{{getNbNotSeen}}
+                                </span>
+                            {{/if}}
+                            {{#if getNbComment}}
+                                <span class="badge badge-info" data-toggle="tooltip" title="{{getNbComment}} commentaires">
+                                    <i class="far fa-comment"></i>&nbsp;{{getNbComment}}
+                                </span>
+                            {{/if}}        
+                    </span>
                 </button>
             </h5>
         </div>

@@ -88,6 +88,12 @@ Template.VersionDetails.events({
 });
 
 Template.VersionDetails.helpers({
+    CalendarDate(date) {
+        return moment(date).format("DD/MM/YYYY");
+    },
+    WatchDate(date) {
+        return moment(date).format("HH:mm");
+    },
     getNbAccepted() {
         let version = Versions.findOne(Template.instance().data.versionId);
         if (version) {
@@ -98,7 +104,7 @@ Template.VersionDetails.helpers({
             });
             if (nb == 0)
                 return "";
-            return nb + " Accepté";
+            return nb;
         }
         return "";
     },
@@ -112,7 +118,7 @@ Template.VersionDetails.helpers({
             });
             if (nb == 0)
                 return "";
-            return nb + " Refusé";
+            return nb;
         }
         return "";
     },
@@ -126,7 +132,7 @@ Template.VersionDetails.helpers({
             });
             if (nb == 0)
                 return "";
-            return nb + " En attente";
+            return nb;
         }
         return "";
     },
@@ -140,7 +146,7 @@ Template.VersionDetails.helpers({
             });
             if (nb == 0)
                 return "";
-            return nb + " Commentaires";
+            return nb;
         }
         return "";
     },
@@ -155,7 +161,7 @@ Template.VersionDetails.helpers({
             });
             if (nb == 0)
                 return "";
-            return nb + " Pas vu";
+            return nb;
         }
         return "";
     },

@@ -10,5 +10,14 @@
 .version-title {
     text-align: left;
     background: transparent;
-    width: 100%;
+    width: 96%;
+}
+
+.version-resume .badge {
+    font-size: 15px;
+}
+
+.version-ico {
+    width: 3%;
+    display: inline-block;
 }
