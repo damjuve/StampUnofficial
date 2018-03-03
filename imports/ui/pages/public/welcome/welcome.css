@@ -1,11 +1,13 @@
 .landing-row {
     padding: 5px 20px;
+    margin: 40px 0px;
 }
 
-.landing-row-1 {
-    background-color: grey;
+.landing-brand {
+    font-size: 55px;
+    font-family: 'Pacifico', cursive;
 }
 
-.landing-row-2 {
-    background-color: blue;
+.landing-head {
+    margin-top: 0px;
 }

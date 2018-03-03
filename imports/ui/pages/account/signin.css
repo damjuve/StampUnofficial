@@ -69,9 +69,11 @@
 #google {
     color: white;
     background: #dd4b39;
+    padding: 10px;
 }
 
 #facebook {
     color: white;
     background: #3b5998;
+    padding: 10px;
 }
