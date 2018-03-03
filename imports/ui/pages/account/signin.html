@@ -1,0 +1,29 @@
+<template name="AccountSignin">
+    <div class="col-md-6 offset-md-3">
+        <form class="form-signin" id="signin">
+            <div class="text-center mb-4">
+                <h1 class="h3 mb-3 font-weight-normal">Se connecter</h1>
+            </div>
+        
+            <div class="form-label-group">
+                <input type="email" id="email" value="{{EmailValue}}" class="form-control" placeholder="Adresse email" required autofocus>
+                <label for="email">Adresse email</label>
+            </div>
+        
+            <div class="form-label-group">
+                <input type="password" id="password" class="form-control" placeholder="Mot de passe" required>
+                <label for="password">Mot de passe</label>
+            </div>
+        
+            <div class="checkbox mb-3">
+                <label>
+                    <input type="checkbox" value="remember-me"> Rester connecté
+                </label>
+            </div>
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Connexion</button>
+            <a href="#" class="btn btn-block" id="reset">Mot de passe oublié</a>
+            <button class="btn btn-sm btn-block" id="google" type="button"><i class="fab fa-google"></i> Connexion avec Google</button>
+            <button class="btn btn-sm btn-block" id="facebook" type="button"><i class="fab fa-facebook-f"></i> Connexion avec Facebook</button>
+        </form>  
+    </div>
+</template>

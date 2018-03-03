@@ -1,0 +1,67 @@
+<template name="PublicFaq">
+    <h1 class="text-center">Foire aux questions</h1>
+    <div id="accordion" class="mt-5">
+        <div class="card">
+            <div class="card-header" id="headingOne">
+                <h5 class="mb-0">
+                    <button class="btn btn-link" data-toggle="collapse" data-target="#q-free">
+                        L'application est-elle entièrement gratuite ? Va-t-elle le rester ?
+                    </button>
+                </h5>
+            </div>
+            <div id="q-free" class="collapse show" data-parent="#accordion">
+                <div class="card-body">
+                    Stamp est actuellement en version Alpha, et pour le moment gratuite à 100%<br/>
+                    A termes certaines parties de l'application deviendrons payante, mais il sera toujours possible d'utiliser Stamp sans rien payer
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header" id="headingOne">
+                <h5 class="mb-0">
+                    <button class="btn btn-link" data-toggle="collapse" data-target="#q-safe">
+                        Mes fichiers sont-ils en sécurité ?
+                    </button>
+                </h5>
+            </div>
+            <div id="q-safe" class="collapse" data-parent="#accordion">
+                <div class="card-body">
+                    Nous utilisons un serveur Amazon AWS pour stocker vos données en toute sécurité<br/>
+                    Nous garantissons ainsi que personne d'autre que vous et vos collaborateurs ne peuvent ya accéder
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header" id="headingOne">
+                <h5 class="mb-0">
+                    <button class="btn btn-link" data-toggle="collapse" data-target="#q-collab">
+                        Mes collaborateurs devront-ils créer un compte Stamp ?
+                    </button>
+                </h5>
+            </div>
+            <div id="q-collab" class="collapse" data-parent="#accordion">
+                <div class="card-body">
+                    Si vous utilisez des espaces publiques, vous pourrez partager vos fichiers via un simple lien<br/>
+                    Néanmoins, pour utiliser le système d'approbation ou permettre à vos collaborateurs d'ajouter leurs versions de vos documents, ils devront posséder un compte Stamp<br/>
+                    Pour celà rien de plus simple, invitez les à votre espace via leur adresse email. Un email leur sera envoyé automatiquement leur permettant de se créer un compte et de rejoindre votre espace
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header" id="headingOne">
+                <h5 class="mb-0">
+                    <button class="btn btn-link" data-toggle="collapse" data-target="#q-alpha">
+                        Le site est en version Alpha, cela signifie-t-il qu'il continue d'évoluer ?
+                    </button>
+                </h5>
+            </div>
+            <div id="q-alpha" class="collapse" data-parent="#accordion">
+                <div class="card-body">
+                    Tout à fait, Stamp n'en est qu'à ses débuts et nous comptons sur votre aide pour proposer un service toujours plus performant<br/>
+                    Vous pouvez consulter les fonctionnalités ajoutées, en cours de développement ou en attente via notre <a href="/versions">page de versions</a><br/>
+                    Vous pouvez également <a href="/contact">nous contacter</a> pour nous transmettre vos remarques ou vos idées d'améliorations
+                </div>
+            </div>
+        </div>
+    </div>
+</template>

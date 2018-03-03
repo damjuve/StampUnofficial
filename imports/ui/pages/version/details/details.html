@@ -1,0 +1,94 @@
+<template name="VersionDetails">
+    {{#with currentVersion}}
+    <div class="card">
+        <div class="card-header version-header">
+            <h5 class="mb-0">
+                <button class="btn version-title" data-toggle="collapse" data-target="#v{{this._id}}">
+                    <i class="fas fa-code-branch"></i> Par <b>{{getUsername userId}}</b>, le {{humanDate this.date}}{{#if last}} (plus récente){{/if}}&nbsp;
+                    <span class="badge badge-success">{{getNbAccepted}}</span>
+                    <span class="badge badge-danger">{{getNbRefused}}</span>
+                    <span class="badge badge-primary">{{getNbWaiting}}</span>
+                    <span class="badge badge-secondary">{{getNbNotSeen}}</span>
+                    <span class="badge badge-info">{{getNbComment}}</span>
+                </button>
+            </h5>
+        </div>
+        <div id="v{{this._id}}" class="collapse {{#if last}}show{{/if}}" data-parent="#accordion">
+            <div class="card-body version-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="version-description">{{{this.description}}}</div>
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-md-4">
+                        {{#with (versionFile fileId)}}
+                            {{#if isImage}}
+                                <a href="{{this.url}}" target="_blank"><img src="{{this.url}}" class="img-fluid mx-auto d-block my-auto"/></a>
+                            {{else}}
+                                {{#if isPDF this}}
+                                    <object data="{{this.url}}" height="300px" type='application/pdf'>
+                                        <p>Couldn't display the file.</p>
+                                    </object>
+                                {{else}}
+                                    Pas de preview possible
+                                {{/if}}
+                            {{/if}}
+                        {{else}}
+                            LOADING
+                        {{/with}}
+                    </div>
+                    <div class="col-md-8">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="btn-group" role="group">
+                                    <button type="button" class="btn btn-sm btn-danger" id="open-browser" data-toggle="tooltip" title="Ouvrir dans un autre onglet"><i class="fas fa-external-link-alt"></i></button>
+                                    <button type="button" class="btn btn-sm btn-success" id="download" data-toggle="tooltip" title="Télécharger"><i class="fas fa-download"></i></button>
+                                </div>
+                            </div>
+                            <div class="col-md-6 text-center">
+                                {{#if canStamp}}
+                                    <div class="btn-group" role="group">
+                                        <button type="button" class="btn btn-sm {{hasRefused}}" {{hasRefused 'disabled'}} id="stamp-down"><i class="far fa-thumbs-down"></i> Refuser</button>
+                                        <button type="button" class="btn btn-sm {{hasAccepted}}" {{hasAccepted 'disabled'}} id="stamp-up"><i class="far fa-thumbs-up"></i> Valider</button>
+                                    </div>
+                                {{/if}}
+                            </div>
+                            <div class="col-md-3">
+                                {{#if canStamp}}
+                                    {{> VersionComment versionId=this._id }}
+                                {{/if}}
+                            </div>
+                        </div>
+                        <table class="table table-sm mt-2">
+                            <thead class="thead-light">
+                                <th>Utilisateur</th>
+                                <th>Statut</th>
+                                <th>Commentaire</th>
+                            </thead>
+                            <tbody>
+                                {{#each user in folderUsers}}
+                                    <tr>
+                                        <td>{{getUsername user.userId}}</td>
+                                        <td>
+                                            <span class="badge {{getStatusBadge user.userId}}">{{getStatus user.userId}}</span>
+                                        </td>
+                                        <td>
+                                            {{#if hasCommented user.userId}}
+                                            <button type="button" class="btn btn-sm btn-info show-comment" value="{{user.userId}}">
+                                                <i class="far fa-comment"></i> Voir le commentaire
+                                            </button>
+                                            {{/if}}
+                                        </td>
+                                    </tr>
+                                {{/each}}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+    {{/with}}
+</template>

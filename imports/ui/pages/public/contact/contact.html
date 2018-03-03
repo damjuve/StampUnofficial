@@ -1,0 +1,20 @@
+<template name="PublicContact">
+    <div class="col-md-8 offset-md-2">
+        <form id="contact">
+            <div class="text-center mb-4">
+                <h1 class="mb-3 font-weight-normal">Contactez nous</h1>
+                <p>Une remarque ? Une question ? Un problème ?<br/>
+                    Prenez le temps de nous écrire, nous vous répondrons dans les plus brefs délais</p>
+            </div>
+            <div class="form-group">
+                <label for="email">Adresse email</label>
+                <input type="email" id="email" class="form-control" placeholder="Adresse email" required autofocus>
+            </div>
+            <div class="form-group">
+                <label for="message">Message</label>
+                <div id="wisiwig-contact"></div>
+            </div>
+            <button class="btn btn-lg btn-success btn-block" type="submit">Envoyer</button>
+        </form>  
+    </div>
+</template>

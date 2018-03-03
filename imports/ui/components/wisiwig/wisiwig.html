@@ -1,0 +1,28 @@
+<template name="wisiwig">
+    <div id="wisiwig"></div>
+    <button class="btn btn-default" id="insert">Insérer</button>
+    <button class="btn btn-success" id="save">Enregistrer</button>
+    <br />
+    <div class="card">
+        <div class="card-block">
+            <h4 class="card-title">
+                CODE
+            </h4>
+            <p class="card-text">
+                {{getText}}
+            </p>
+        </div>
+    </div>
+    <br />
+    <div class="card">
+        <div class="card-block">
+            <h4 class="card-title">
+                TRIPLE BRACKET
+            </h4>
+            <p class="card-text">
+                {{{getText}}}
+            </p>
+        </div>
+    </div>
+    
+</template>

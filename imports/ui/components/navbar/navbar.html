@@ -1,0 +1,28 @@
+<template name="navbar">
+    <nav id="navbar" class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <!-- Sidebar button -->
+        <button type="button" id="sidebar-btn" class="btn btn-secondary mr-5">
+            <span class="navbar-toggler-icon"></span>            
+        </button>
+
+        <!-- Brand -->
+        <a class="navbar-brand" href="/">
+            <i class="fa fa-gavel"></i> Stamp
+        </a>
+
+        <div class="ml-auto">
+            <!-- Notifs -->
+            <span class="dropdown" id="notifsDropdown">
+                {{> NotifList }} 
+            </span>   
+            <!-- Settings -->
+            <button type="button" id="profile" class="btn btn-secondary" data-toggle="tooltip" title="Profil">
+                <i class="fas fa-cog"></i>
+            </button>
+            <!-- Logout -->
+            <button type="button" id="logout" class="btn btn-danger" data-toggle="tooltip" title="Déconnexion">
+                <i class="fas fa-sign-out-alt"></i>
+            </button>    
+        </div>            
+    </nav>
+</template>

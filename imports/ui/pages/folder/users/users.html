@@ -1,0 +1,52 @@
+<template name="FolderUsers">
+    <div class="col-md-12 mt-3">
+        <h1 class="text-center">Gestion du dossier : {{folderName}}</h1>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="float-right">
+                    {{#if isFolderAdmin}}
+                        {{> InviteFolder }}
+                    {{/if}}
+                </div>
+            </div>
+        </div>
+        <table class="table mt-3">
+            <thead class="thead-light">
+                <th>Utilisateur</th>
+                <th>Date d'invitation</th>
+                {{#if isFolderAdmin}}
+                    <th class="text-center" data-toggle="tooltip" title="Voir"><i class="fas fa-eye"></i></th>
+                    <th class="text-center" data-toggle="tooltip" title="Approuver"><i class="fa fa-gavel"></i></th>
+                    <th class="text-center" data-toggle="tooltip" title="Ajouter un document"><i class="fa fa-file"></i></th>
+                    <th class="text-center" data-toggle="tooltip" title="Ajouter une version"><i class="fas fa-code-branch"></i></th>
+                    <th class="text-center" data-toggle="tooltip" title="Supprimer"><i class="fas fa-unlock-alt"></i></th>                            
+                {{/if}}
+            </thead>
+            <tbody>
+                {{#each user in folderUsers}}
+                <tr class="{{#if $eq user.userId $.Meteor.userId}}my-line{{/if}}">
+                    <td>{{getUsername user.userId}}{{#if $eq user.userId $.Meteor.userId}} (vous){{/if}}</td>
+                    <td>{{humanDateShort user.date}}</td>
+                    {{#if isFolderAdmin}}
+                        <td class="text-center">
+                            <input type="checkbox" class="see-right" checked="{{user.read}}" disabled value="{{user.userId}}">
+                        </td>
+                        <td class="text-center">
+                            <input type="checkbox" class="stamp-right" checked="{{user.stamp}}" disabled="{{#if $eq user.userId folderOwner}}disabled{{/if}}" value="{{user.userId}}">
+                        </td>
+                        <td class="text-center">
+                            <input type="checkbox" class="document-right" checked="{{user.addDocument}}" disabled="{{#if $eq user.userId folderOwner}}disabled{{/if}}" value="{{user.userId}}">
+                        </td>
+                        <td class="text-center">
+                            <input type="checkbox" class="version-right" checked="{{user.addVersion}}" disabled="{{#if $eq user.userId folderOwner}}disabled{{/if}}" value="{{user.userId}}">
+                        </td>
+                        <td class="text-center">
+                            <input type="checkbox" class="admin-right" checked="{{user.admin}}" disabled="{{#if $eq user.userId folderOwner}}disabled{{/if}}" value="{{user.userId}}">
+                        </td>
+                    {{/if}}
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+    </div>
+</template>

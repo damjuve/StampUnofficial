@@ -1,0 +1,38 @@
+<template name="breadcrumb">
+    <div class="row">
+        <div class="col-md-12">
+            <nav aria-label="breadcrumb" class="mt-2">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/"><i class="fas fa-home"></i> Mes espaces</a></li>
+                    {{#if isNotRootFolder}}
+                        {{#with getRootFolder}}
+                            <li class="breadcrumb-item">
+                                <a href="/folder/{{getRootFolderId}}">
+                                    {{this.name}}
+                                </a>
+                            </li>
+                        {{/with}}
+                    {{/if}}
+                    {{#with getFolder}}
+                        <li class="breadcrumb-item {{isFolderActive}}">
+                            {{#if isFolderActive}}
+                                {{this.name}}
+                            {{else}}
+                                <a href="/folder/{{getFolderId}}">{{this.name}}</a>
+                            {{/if}}
+                        </li>
+                    {{/with}}
+                    {{#with getDocument}}
+                        <li class="breadcrumb-item {{isDocActive}}">
+                            {{#if isDocActive}}
+                                {{this.name}}
+                            {{else}}
+                            <a href="/folder/{{getFolderId}}/doc/{{getDocId}}">{{this.name}}</a>
+                            {{/if}}
+                        </li>
+                    {{/with}}
+                </ol>
+            </nav>
+        </div>
+    </div>
+</template>

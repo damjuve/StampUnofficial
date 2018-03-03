@@ -1,0 +1,33 @@
+.s-alert-box {
+    z-index: 9999;
+}
+
+.tr-cursor {
+    cursor: pointer;
+}
+
+.dropzone {
+    text-align: center;
+    border: 1px dashed grey;
+    border-radius: 5px;
+    background: lightgray;
+    color: black;
+    height: 90px;
+    line-height: 90px;
+    cursor: pointer;
+}
+
+.dropzone:hover {
+    background: darkgray;
+    color: white;
+}
+
+.one-px {
+    height: 1px;
+    width: 1px;
+    display: none;
+}
+
+.breadcrumb {
+    padding: .30rem 1rem;
+}

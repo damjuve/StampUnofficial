@@ -1,0 +1,22 @@
+<template name="DocumentDetails">
+    <div class="col-md-12 mt-3">
+    {{#with currentDocument}}
+        <h1 class="text-center">Document: {{this.name}}</h1>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="float-right">
+                    {{#if canAddVersion}}
+                        {{> VersionCreate }}
+                    {{/if}}
+                </div>
+            </div>
+        </div>
+        {{> breadcrumb }}
+        <div id="accordion" class="mt-3">
+            {{#each version in documentVersions}}
+                {{> VersionDetails versionId=version last=($eq @index 0)}}
+            {{/each}}
+        </div>
+    {{/with}}
+    </div>
+</template>

@@ -1,0 +1,41 @@
+<template name="sidebar">
+    <nav id="sidebar">
+        <div class="sidebar-header">
+            <!--{{#if $eq Spaces.length 0}}-->
+                {{> SpaceCreate position="sidebar"}}
+            <!--{{else}}-->
+                <div class="form-group mt-2">
+                    <select class="form-control" id="spaceSelect">
+                        {{#each space in Spaces}}
+                            <option value="{{space._id}}" selected="{{isSelectedSpace space._id}}">{{space.name}}</option>
+                        {{/each}}
+                    </select>
+                </div>
+            <!--{{/if}}-->
+        </div>
+        <ul class="list-unstyled components">
+            {{#each folder in Folders}}
+                <li folderid="{{folder._id}}" class="sideFolder {{#if isActiveFolder folder._id}}active{{/if}}">
+                    <span class="name"><i class="fa fa-folder mr-3"></i>{{folder.name}}</span>
+                </li>
+            {{/each}}
+
+            {{#each document in Documents}}
+                <li documentid="{{document._id}}" class="sideDocument {{#if isActiveDocument document._id}}active{{/if}}">
+                    <span class="name"><i class="fa fa-file mr-3"></i>{{document.name}}</span>
+                </li>
+            {{/each}}
+            
+            
+            <!-- togglable link example 
+                <li>
+                <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false">Pages</a>
+                <ul class="collapse list-unstyled" id="homeSubmenu">
+                    <li><a href="#">Page</a></li>
+                    <li><a href="#">Page</a></li>
+                    <li><a href="#">Page</a></li>
+                </ul>
+            </li>   -->
+        </ul>
+    </nav>
+</template>

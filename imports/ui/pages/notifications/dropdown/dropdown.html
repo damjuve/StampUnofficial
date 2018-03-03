@@ -1,0 +1,28 @@
+<template name="NotifList">
+    <button id="notif-dropdown-btn" type="button" class="btn btn-primary" role="button" data-toggle="dropdown" title="Notifications">
+        <span id="notif-dropdown-badge" class="badge badge-light">{{nbNewNotifs}}</span>
+        <i class="fas fa-exclamation-circle"></i>
+    </button>
+    <ul id="notif-dropdown-list" class="dropdown-menu menu-right notifications" role="menu" aria-labelledby="dLabel">
+        <div class="notification-heading">
+            <h4 class="menu-title text-danger">Notifications</h4>
+        </div>
+        <li class="divider"></li>
+        <div class="notifications-wrapper">
+            {{#each notif in notifications}}
+                <a class="content" href="{{notif.data.url}}">
+                    <div class="notification-item {{isNewNotif notif}}">
+                        <h4 class="item-title">{{notif.title}}</h4>
+                        <p class="item-info">{{notif.content}}</p>
+                    </div>
+                </a>
+            {{else}}
+            <span class="text-center text-muted font-italic" style="padding-left: 20px">Aucune notification</span>
+            {{/each}}
+        </div>
+        <li class="divider"></li>
+        <div class="notification-footer">
+            <button role="button" class="btn btn-outline-danger btn-sm float-right" id="goNotif">Voir toutes</button>
+        </div>
+    </ul>
+</template>

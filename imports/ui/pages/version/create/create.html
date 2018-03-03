@@ -1,0 +1,66 @@
+<template name="VersionCreate">
+    <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#versionModal">
+        Ajouter une version
+    </button>
+    <div class="modal fade" id="versionModal">
+        <form id="create">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Nouvelle version</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label class="form-control-label">Description:</label>
+                        <div id="wisiwig-version-create"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="file" class="form-control-label">Fichier:</label>
+                        <input id="fileinput" class="one-px" type="file" name="file">
+                        {{#with fileToUpload}}
+                            <div class="col-sm-12">
+                                <table class="table table-sm">
+                                    <thead>
+                                        <th>Fichier</th>
+                                        <th>Type</th>
+                                        <th class="text-center">Statut</th>
+                                        <th class="text-center">Actions</th>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>{{this.original.name}}</td>
+                                            <td>{{this.original.type}}</td>
+                                            {{#unless this.isUploaded}}
+                                                <td class="text-center"><i class="far fa-circle fa-spin text-warning"></i></td>
+                                                <td>
+                                                    {{> FS.UploadProgressBar bootstrap=true }}
+                                                </td>
+                                            {{else}}
+                                                <td class="text-center"><i class="fas fa-check text-success"></i></td>
+                                                <td class="text-center">
+                                                    <button type="button" value="{{this._id}}" class="btn btn-sm btn-outline-danger remove-file"><i class="fas fa-times"></i></button>
+                                                </td>
+                                            {{/unless}}
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        {{else}}
+                            <div id="dropzone">
+                                <div class="dropzone"><i class="far fa-plus-square"></i> Cliquez / Glissez un fichier</div>
+                            </div>
+                        {{/with}}
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Fermer</button>
+                    <button class="btn btn-outline-success" disabled="{{canUpload}}" type="submit">Uploader</button>
+                </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</template>

@@ -1,0 +1,14 @@
+.version-body img {
+    max-height: 250px;
+}
+
+.version-description {
+    padding: 15px;
+    border: 1px solid #9E9E9E;
+}
+
+.version-title {
+    text-align: left;
+    background: transparent;
+    width: 100%;
+}

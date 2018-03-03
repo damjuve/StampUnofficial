@@ -1,0 +1,72 @@
+<template name="Profile">
+    <div class="col-md-12 mt-3">
+        <h1 class="text-center">Profil</h1>
+        <div class="row mt-5">
+            <div class="col-md-6">
+                {{#if isAccount 'facebook'}}
+                    <h2>Facebook account : {{getServiceName}}</h2>
+                {{/if}}
+                {{#if isAccount 'google'}}
+                    <h2>Google account : {{getServiceName}}</h2>
+                {{/if}}
+                {{#if isAccount 'email'}}
+                    <form id="editEmail">
+                        <h4>Modifier votre adresse email</h4>
+                        <div class="form-group">
+                            <input type="email" class="form-control" id="email" value="{{getEmail}}">
+                        </div>
+                        <div class="text-right">
+                            <button type="submit" class="btn btn-primary">
+                                Modifier
+                            </button>
+                        </div>
+                    </form>
+                    <hr>
+                {{/if}}
+                <form id="editUsername">
+                    <h4>Modifier votre nom d'utilisateur</h4>
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="username" value="{{getUsername}}">    
+                    </div>
+                    <div class="text-right">
+                        <button type="submit" class="btn btn-primary">
+                            Modifier
+                        </button>
+                    </div>
+                </form>
+                <hr>
+                {{#if isAccount 'email'}}
+                    <form id="editPassword">
+                        <h4>Modifier votre mot de passe</h4>
+                        <div class="form-group">
+                            <input type="password" class="form-control" id="password" placeholder="Nouveau mot de passe">
+                            <input type="password" class="form-control mt-3" id="password2" placeholder="Confirmez le mot de passe">
+                        </div>
+                        <div class="text-right">
+                            <button type="submit" class="btn btn-primary">
+                                Modifier
+                            </button>    
+                        </div>    
+                    </form>
+                {{/if}}
+            </div>
+            <div class="col-md-6">
+                <form id="editMail">
+                    <h4>Notifications</h4>
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input type="checkbox" class="form-check-input" id="checkNotif" checked="{{hasEmailNotif}}">
+                            Recevoir mes notifications également par email
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input type="checkbox" class="form-check-input" id="checkNewsletter" checked="{{hasEmailNewsletter}}">
+                            Recevoir la newsletter
+                        </label>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</template>
