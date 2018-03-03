@@ -3,16 +3,17 @@
     <div class="card">
         <div class="card-header version-header">
             <h5 class="mb-0">
-                <div class="version-ico {{getVersionClass}}">
-                    <i class="fas fa-code-branch"></i>
-                </div>
                 <button class="btn version-title" data-toggle="collapse" data-target="#v{{this._id}}">
+                    {{#with versionIco}}
+                        <span class="badge badge-{{versionIco.badge}} version-ico" data-toggle="tooltip" title="{{versionIco.title}}">
+                            <i class="fas fa-code-branch"></i>
+                        </span>
+                    {{/with}}
                     <span class="ml-3">
                         <i class="fas fa-user"></i>&nbsp;<b>{{getUsername userId}}</b>
                         <i class="far fa-calendar-alt ml-2"></i>&nbsp;{{CalendarDate this.date}}
                         <i class="fas fa-clock ml-2"></i>&nbsp;{{WatchDate this.date}}
                     </span>
-                    {{#if last}} (plus récente){{/if}}
                     <span class="text-right float-right mr-2 version-resume">
                             {{#if getNbAccepted}}
                                 <span class="badge badge-success" data-toggle="tooltip" title="Approuvé par {{getNbAccepted}} utilisateurs">
@@ -45,30 +46,36 @@
         </div>
         <div id="v{{this._id}}" class="collapse {{#if last}}show{{/if}}" data-parent="#accordion">
             <div class="card-body version-body">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="version-description">{{{this.description}}}</div>
+                {{#if this.description}}
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="version-description">{{{this.description}}}</div>
+                        </div>
                     </div>
-                </div>
+                {{/if}}
                 <div class="row mt-3">
-                    <div class="col-md-4">
-                        {{#with (versionFile fileId)}}
-                            {{#if isImage}}
-                                <a href="{{this.url}}" target="_blank"><img src="{{this.url}}" class="img-fluid mx-auto d-block my-auto"/></a>
-                            {{else}}
-                                {{#if isPDF this}}
-                                    <object data="{{this.url}}" height="300px" type='application/pdf'>
-                                        <p>Couldn't display the file.</p>
-                                    </object>
+                    {{#with (versionFile fileId)}}
+                        {{#if hasPreview this}}
+                            <div class="col-md-4 filepreview">
+                                {{#if isImage}}
+                                    <a href="{{this.url}}" target="_blank"><img src="{{this.url}}" class="img-fluid mx-auto d-block my-auto"/></a>
                                 {{else}}
-                                    Pas de preview possible
+                                    {{#if isPDF this}}
+                                        <object data="{{this.url}}" height="300px" type='application/pdf'>
+                                            <p>Couldn't display the file.</p>
+                                        </object>
+                                    {{else}}
+                                        <i>Pas de preview possible</i>
+                                    {{/if}}
                                 {{/if}}
-                            {{/if}}
-                        {{else}}
-                            LOADING
-                        {{/with}}
-                    </div>
-                    <div class="col-md-8">
+                            </div>
+                        {{/if}}
+                    {{else}}
+                            <div class="col-md-4 filepreview">
+                                Chargement...
+                            </div>
+                    {{/with}}
+                    <div class="col-md">
                         <div class="row">
                             <div class="col-md-3">
                                 <div class="btn-group" role="group">
@@ -79,8 +86,8 @@
                             <div class="col-md-6 text-center">
                                 {{#if canStamp}}
                                     <div class="btn-group" role="group">
-                                        <button type="button" class="btn btn-sm {{hasRefused}}" {{hasRefused 'disabled'}} id="stamp-down"><i class="far fa-thumbs-down"></i> Refuser</button>
-                                        <button type="button" class="btn btn-sm {{hasAccepted}}" {{hasAccepted 'disabled'}} id="stamp-up"><i class="far fa-thumbs-up"></i> Valider</button>
+                                            <button type="button" class="btn btn-sm {{hasAccepted}}" {{hasAccepted 'disabled'}} id="stamp-up"><i class="far fa-check-circle"></i> Valider</button>
+                                            <button type="button" class="btn btn-sm {{hasRefused}}" {{hasRefused 'disabled'}} id="stamp-down"><i class="far fa-times-circle"></i> Refuser</button>
                                     </div>
                                 {{/if}}
                             </div>
@@ -101,7 +108,9 @@
                                     <tr>
                                         <td>{{getUsername user.userId}}</td>
                                         <td>
-                                            <span class="badge {{getStatusBadge user.userId}}">{{getStatus user.userId}}</span>
+                                            {{#with Status user.userId}}
+                                                <span class="badge {{Status.badge}}"><i class="fa {{Status.ico}}"></i>&nbsp;{{Status.title}}</span>
+                                            {{/with}}
                                         </td>
                                         <td>
                                             {{#if hasCommented user.userId}}

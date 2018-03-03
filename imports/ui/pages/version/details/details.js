@@ -94,6 +94,27 @@ Template.VersionDetails.helpers({
     WatchDate(date) {
         return moment(date).format("HH:mm");
     },
+    versionIco() {
+        if (Template.instance().data.last)
+            return {badge: "primary", title: "Version la plus récente"};
+        let version = Versions.findOne(Template.instance().data.versionId);
+        if (version) {
+            let nbOk = 0;
+            let nbKo = 0;
+            version.comments.forEach((comment) => {
+                if (comment.accepted == true)
+                    nbOk++;
+                if (comment.accepted == false)
+                    nbKo++;
+            });
+            if (nbOk != 0 && nbOk == version.comments.length)
+                return {badge: "success", title: "Validée par tous"};
+            if (nbKo != 0 && nbKo == version.comments.length)
+                return {badge: "danger", title: "Refusée par tous"};
+            return {badge: "secondary", title: "Ancienne version"};
+        }
+        return "";
+    },
     getNbAccepted() {
         let version = Versions.findOne(Template.instance().data.versionId);
         if (version) {
@@ -103,10 +124,10 @@ Template.VersionDetails.helpers({
                     nb += 1;
             });
             if (nb == 0)
-                return "";
+                return 0;
             return nb;
         }
-        return "";
+        return 0;
     },
     getNbRefused() {
         let version = Versions.findOne(Template.instance().data.versionId);
@@ -117,10 +138,10 @@ Template.VersionDetails.helpers({
                     nb += 1;
             });
             if (nb == 0)
-                return "";
+                return 0;
             return nb;
         }
-        return "";
+        return 0;
     },
     getNbWaiting() {
         let version = Versions.findOne(Template.instance().data.versionId);
@@ -131,10 +152,10 @@ Template.VersionDetails.helpers({
                     nb += 1;
             });
             if (nb == 0)
-                return "";
+                return 0;
             return nb;
         }
-        return "";
+        return 0;
     },
     getNbComment() {
         let version = Versions.findOne(Template.instance().data.versionId);
@@ -145,10 +166,10 @@ Template.VersionDetails.helpers({
                     nb += 1;
             });
             if (nb == 0)
-                return "";
+                return 0;
             return nb;
         }
-        return "";
+        return 0;
     },
     getNbNotSeen() {
         let folder = Folders.findOne(Router.current().params.folder_id);
@@ -160,36 +181,27 @@ Template.VersionDetails.helpers({
                     nb += 1;
             });
             if (nb == 0)
-                return "";
+                return 0;
             return nb;
         }
-        return "";
+        return 0;
     },
     currentVersion() {
         return Versions.findOne(Template.instance().data.versionId);
     },
-    getStatus(userId) {
+    Status(userId) {
         let version = Versions.findOne(Template.instance().data.versionId);
         if (version) {
             let userComment = version.comments.find((comment) => comment.userId == userId);
             if (!userComment) {
-                return "Pas vu";
+                return {badge: "badge-secondary", title: "Pas vu", ico: "fa-eye-slash"};
             }
             if (userComment.accepted == undefined)
-                return "En attente";
-            return (userComment.accepted ? "Validé" : "Refusé");
-        }
-    },
-    getStatusBadge(userId) {
-        let version = Versions.findOne(Template.instance().data.versionId);
-        if (version) {
-            let userComment = version.comments.find((comment) => comment.userId == userId);
-            if (!userComment) {
-                return "badge-secondary";
-            }
-            if (userComment.accepted == undefined)
-                return "badge-primary";
-            return (userComment.accepted ? "badge-success" : "badge-danger");
+                return {badge: "badge-primary", title: "En attente", ico: "fa-hourglass"};
+            if (userComment.accepted)
+                return {badge: "badge-success", title: "Validé", ico: "fa-check-circle"};
+            else
+                return {badge: "badge-danger", title: "Refusé", ico: "fa-times-circle"};
         }
     },
     hasAccepted(disabled) {
@@ -240,6 +252,14 @@ Template.VersionDetails.helpers({
     },
     isPDF(file) {
         return file.original.type == 'application/pdf';
+    },
+    hasPreview(file) {
+        let types = file.original.type.split('/');
+        if (types[0] == 'image')
+            return true;
+        if (types[1] == 'pdf')
+            return true;
+        return false;
     },
     canStamp() {
         let parentFolder = Folders.findOne(Router.current().params.folder_id);
