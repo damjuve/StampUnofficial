@@ -1,3 +1,9 @@
 .version-header {
     padding: 0;
 }
+
+.badge-doc {
+    padding: 8px 12px;
+    font-size: 14px;
+    min-width: 70px;
+}

@@ -11,13 +11,25 @@
         <table class="table table-striped table-hover mt-3">
             <thead class="thead-dark">
                 <th>Nom</th>
-                <th>Actions</th>
+                <th></th>
+                <th class="text-center">Actions</th>
             </thead>
             <tbody>
             {{#each space in spaces}}
                 <tr class="table-secondary details-space tr-cursor" id="{{space._id}}">
                     <td>{{space.name}}</td>
-                    <td>
+                    <td class="text-center">
+                        <span class="badge badge-secondary badge-space" data-toggle="tooltip" title="{{getNbUsers space}} utilisateurs participent à cet espace">
+                            <i class="fas fa-users"></i>&nbsp;{{getNbUsers space}}
+                        </span>
+                        <span class="badge badge-secondary badge-space" data-toggle="tooltip" title="{{getNbFolders space}} dossiers dans cet espace">
+                            <i class="fas fa-folder"></i>&nbsp;{{getNbFolders space}}
+                        </span>
+                        <span class="badge badge-secondary badge-space" data-toggle="tooltip" title="{{getNbFiles space}} documents dans cet espace">
+                            <i class="fas fa-file"></i>&nbsp;{{getNbFiles space}}
+                        </span>
+                    </td>
+                    <td class="text-center">
                         <button type="button" value="{{space._id}}" class="btn btn-sm btn-outline-primary users-space"><i class="fa fa-users"></i></button>
                         {{#if $eq space.userId $.Meteor.userId}}
                             <button type="button" value="{{space._id}}" class="btn btn-sm btn-outline-danger remove-space"><i class="far fa-trash-alt"></i></button>

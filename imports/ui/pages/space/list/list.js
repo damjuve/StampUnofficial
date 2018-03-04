@@ -1,4 +1,5 @@
 import { Spaces } from '/imports/api/space/space.js';
+import { Folders } from '/imports/api/folder/folder.js';
 import '../create/create.js';
 import './list.css';
 import './list.html';
@@ -46,6 +47,30 @@ Template.SpaceList.events({
 });
 
 Template.SpaceList.helpers({
+    getNbUsers(space) {
+        if (space) {
+            return space.users.length;
+        }
+        return 0;
+    },
+    getNbFolders(space) {
+        if (space) {
+            let folder = Folders.findOne(space.rootFolder);
+            if (folder) {
+                return folder.folders.length;
+            }
+        }
+        return 0;    
+    },
+    getNbFiles(space) {
+        if (space) {
+            let folder = Folders.findOne(space.rootFolder);
+            if (folder) {
+                return folder.docs.length;
+            }    
+        }
+        return 0;
+    },
     spaces() {
         return Spaces.find();
     }

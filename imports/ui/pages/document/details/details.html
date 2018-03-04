@@ -1,9 +1,19 @@
 <template name="DocumentDetails">
     <div class="col-md-12 mt-3">
     {{#with currentDocument}}
-        <h1 class="text-center">Document: {{this.name}}</h1>
+        <h1 class="text-center"><i class="far fa-file"></i>&nbsp;<b>{{this.name}}</b></h1>
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-6">
+                <div class="pull-left">
+                    <span class="badge badge-secondary badge-doc" data-toggle="tooltip" title="{{getNbUsers}} utilisateurs participent à ce document">
+                        <i class="fas fa-users"></i>&nbsp;{{getNbUsers}}
+                    </span>
+                    <span class="badge badge-secondary badge-doc" data-toggle="tooltip" title="{{getNbVersions}} versions disponibles pour ce document">
+                        <i class="fas fa-code-branch"></i>&nbsp;{{getNbVersions}}
+                    </span>
+                </div>
+            </div>
+            <div class="col-md-6">
                 <div class="float-right">
                     {{#if canAddVersion}}
                         {{> VersionCreate }}

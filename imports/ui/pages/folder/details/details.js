@@ -76,7 +76,19 @@ Template.FolderDetails.events({
     }
 });
 
-Template.FolderDetails.helpers({ 
+Template.FolderDetails.helpers({
+    getNbUsers() {
+        let folder = Folders.findOne(Router.current().params.folder_id);
+        return folder.users.length;
+    },
+    getNbFolders() {
+        let folder = Folders.findOne(Router.current().params.folder_id);
+        return folder.folders.length;
+    },
+    getNbFiles() {
+        let folder = Folders.findOne(Router.current().params.folder_id);
+        return folder.docs.length;
+    },
     currentFolder() {
         return Folders.findOne(Router.current().params.folder_id);
     },

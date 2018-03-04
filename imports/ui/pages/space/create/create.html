@@ -1,6 +1,6 @@
 <template name="SpaceCreate">
-    <button type="button" class="btn btn-secondary {{#if isNotSidebar}}float-right{{/if}}" data-toggle="modal" data-target="#spaceModal" style="width: 100%">
-        Créer un espace
+    <button type="button" class="btn btn-secondary {{#if isNotSidebar}}float-right{{/if}} create-btn" data-toggle="modal" data-target="#spaceModal" style="width: 100%">
+        <i class="fas fa-plus-square"></i>&nbsp;Créer un espace
     </button>
     <div class="modal fade" id="spaceModal">
         <form id="create">

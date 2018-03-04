@@ -24,3 +24,8 @@
 .filepreview {
     text-align: center;
 }
+
+.statusBadge {
+    padding: 8px 12px;
+    min-width: 120px;
+}

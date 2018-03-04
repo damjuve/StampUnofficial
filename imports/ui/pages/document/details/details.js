@@ -17,6 +17,19 @@ Template.DocumentDetails.events({
 });
 
 Template.DocumentDetails.helpers({
+    getNbUsers() {
+        let folder = Folders.findOne(Router.current().params.folder_id);
+        if (folder) {
+            return folder.users.length;
+        }
+        return 0;
+    },
+    getNbVersions() {
+        let doc = Documents.findOne(Router.current().params.doc_id);
+        if (doc) {
+            return doc.versions.length;
+        }
+    },
     currentDocument() {
         return Documents.findOne(Router.current().params.doc_id);
     },

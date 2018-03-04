@@ -8,6 +8,7 @@
                         {{#with getRootFolder}}
                             <li class="breadcrumb-item">
                                 <a href="/folder/{{getRootFolderId}}">
+                                    <i class="fas fa-folder"></i>
                                     {{this.name}}
                                 </a>
                             </li>
@@ -16,18 +17,26 @@
                     {{#with getFolder}}
                         <li class="breadcrumb-item {{isFolderActive}}">
                             {{#if isFolderActive}}
+                                <i class="fas fa-folder"></i>
                                 {{this.name}}
                             {{else}}
-                                <a href="/folder/{{getFolderId}}">{{this.name}}</a>
+                                <a href="/folder/{{getFolderId}}">
+                                    <i class="fas fa-folder"></i>
+                                    {{this.name}}
+                                </a>
                             {{/if}}
                         </li>
                     {{/with}}
                     {{#with getDocument}}
                         <li class="breadcrumb-item {{isDocActive}}">
                             {{#if isDocActive}}
+                                <i class="fas fa-file"></i>
                                 {{this.name}}
                             {{else}}
-                            <a href="/folder/{{getFolderId}}/doc/{{getDocId}}">{{this.name}}</a>
+                                <a href="/folder/{{getFolderId}}/doc/{{getDocId}}">
+                                    <i class="fas fa-file"></i>
+                                    {{this.name}}
+                                </a>
                             {{/if}}
                         </li>
                     {{/with}}

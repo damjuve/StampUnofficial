@@ -189,20 +189,44 @@ Template.VersionDetails.helpers({
     currentVersion() {
         return Versions.findOne(Template.instance().data.versionId);
     },
-    Status(userId) {
+    getStatus(type, userId) {
         let version = Versions.findOne(Template.instance().data.versionId);
         if (version) {
             let userComment = version.comments.find((comment) => comment.userId == userId);
             if (!userComment) {
-                return {badge: "badge-secondary", title: "Pas vu", ico: "fa-eye-slash"};
+                if (type == 'badge')
+                    return "badge-secondary";
+                if (type == 'ico')
+                    return "fa-eye-slash";
+                if (type == 'title')
+                    return "Pas vu";
             }
-            if (userComment.accepted == undefined)
-                return {badge: "badge-primary", title: "En attente", ico: "fa-hourglass"};
-            if (userComment.accepted)
-                return {badge: "badge-success", title: "Validé", ico: "fa-check-circle"};
-            else
-                return {badge: "badge-danger", title: "Refusé", ico: "fa-times-circle"};
+            if (userComment.accepted === undefined) {
+                if (type == 'badge')
+                    return "badge-primary";
+                if (type == 'ico')
+                    return "fa-hourglass";
+                if (type == 'title')
+                    return "En attente";
+            }
+            if (userComment.accepted) {
+                if (type == 'badge')
+                    return "badge-success";
+                if (type == 'ico')
+                    return "fa-check-circle";
+                if (type == 'title')
+                    return "Validé";
+            }
+            else {
+                if (type == 'badge')
+                    return "badge-danger";
+                if (type == 'ico')
+                    return "fa-times-circle";
+                if (type == 'title')
+                    return "Refusé";
+            }
         }
+        return "";
     },
     hasAccepted(disabled) {
         let version = Versions.findOne(Template.instance().data.versionId);
@@ -244,6 +268,14 @@ Template.VersionDetails.helpers({
             let comment = version.comments.find(comment => comment.userId == userId);
             if (comment)
                 return comment.comment != undefined;
+        }
+    },
+    getUserDate(userId) {
+        let version = Versions.findOne(Template.instance().data.versionId);
+        if (version) {
+            let comment = version.comments.find(comment => comment.userId == userId);
+            if (comment)
+                return moment(comment.date).format('DD/MM/YYYY HH:MM');
         }
     },
     imageLoaded() {

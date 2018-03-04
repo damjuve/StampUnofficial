@@ -1,10 +1,25 @@
 <template name="FolderDetails">
     <div class="col-md-12 mt-3">
         {{#with currentFolder}}
-            <h1 class="text-center">Dossier: {{this.name}}</h1>
+            <h1 class="text-center"><i class="far fa-folder"></i>&nbsp;<b>{{this.name}}</b></h1>
         {{/with}}
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-6">
+                <div class="float-left">
+                    <span class="badge badge-secondary badge-folder" data-toggle="tooltip" title="{{getNbUsers}} utilisateurs participent à ce dossier">
+                        <i class="fas fa-users"></i>&nbsp;{{getNbUsers}}
+                    </span>
+                    {{#if isRootFolder}}
+                        <span class="badge badge-secondary badge-folder" data-toggle="tooltip" title="{{getNbFolders}} dossiers dans ce dossier">
+                            <i class="fas fa-folder"></i>&nbsp;{{getNbFolders}}
+                        </span>
+                    {{/if}}
+                    <span class="badge badge-secondary badge-folder" data-toggle="tooltip" title="{{getNbFiles}} documents dans ce dossier">
+                        <i class="fas fa-file"></i>&nbsp;{{getNbFiles}}
+                    </span>
+                </div>
+            </div>
+            <div class="col-md-6">
                 <div class="float-right">
                     {{#if canAddFolder}}
                         {{#if isRootFolder}}

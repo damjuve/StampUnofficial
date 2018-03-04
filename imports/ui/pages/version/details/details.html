@@ -39,7 +39,7 @@
                                 <span class="badge badge-info" data-toggle="tooltip" title="{{getNbComment}} commentaires">
                                     <i class="far fa-comment"></i>&nbsp;{{getNbComment}}
                                 </span>
-                            {{/if}}        
+                            {{/if}}     
                     </span>
                 </button>
             </h5>
@@ -100,23 +100,27 @@
                         <table class="table table-sm mt-2">
                             <thead class="thead-light">
                                 <th>Utilisateur</th>
-                                <th>Statut</th>
-                                <th>Commentaire</th>
+                                <th class="text-center">Statut</th>
+                                <th class="text-center">Commentaire</th>
+                                <th class="text-center">Date</th>
                             </thead>
                             <tbody>
                                 {{#each user in folderUsers}}
                                     <tr>
                                         <td>{{getUsername user.userId}}</td>
-                                        <td>
-                                            {{#with Status user.userId}}
-                                                <span class="badge {{Status.badge}}"><i class="fa {{Status.ico}}"></i>&nbsp;{{Status.title}}</span>
-                                            {{/with}}
+                                        <td class="text-center">
+                                            <span class="badge {{getStatus 'badge' user.userId}} statusBadge"><i class="fa {{getStatus 'ico' user.userId}}"></i>&nbsp;{{getStatus 'title' user.userId}}</span>
                                         </td>
-                                        <td>
+                                        <td class="text-center">
                                             {{#if hasCommented user.userId}}
                                             <button type="button" class="btn btn-sm btn-info show-comment" value="{{user.userId}}">
                                                 <i class="far fa-comment"></i> Voir le commentaire
                                             </button>
+                                            {{/if}}
+                                        </td>
+                                        <td class="text-center">
+                                            {{#if getUserDate user.userId}}
+                                                {{getUserDate user.userId}}
                                             {{/if}}
                                         </td>
                                     </tr>

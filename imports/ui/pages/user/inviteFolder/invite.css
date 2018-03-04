@@ -2,3 +2,8 @@ span.select2 {
     display: block;
     width: 100% !important;
 }
+
+.create-btn {
+    padding: 8px 12px;
+    font-size: 16px;
+}
