@@ -48,8 +48,12 @@ Meteor.methods({
         let doc = Documents.findOne(docId);
         if (!doc)
             throw new Meteor.Error('', 'Document not found');
-        if (doc.userId != Meteor.userId())
-            throw new Meteor.Error('', 'You are not the owner');
+        let folder = Folders.findOne(doc.folderId);
+        if (!folder || !folder.users)
+            throw new Meteor.Error('', 'Folder not found');
+        let user = folder.users.find(user => user.userId == Meteor.userId());
+        if (doc.userId != Meteor.userId() && !user.admin)
+            throw new Meteor.Error('', 'You are not authorized');
         removeDocument(docId);
         return true;
     }

@@ -13,6 +13,10 @@ Template.DocumentDetails.onCreated(function() {
     this.subscribe('document.details', Router.current().params.doc_id);
 });
 
+Template.DocumentDetails.onRendered(function() {
+    var clipboard = new ClipboardJS('#inputBtn');
+});
+
 Template.DocumentDetails.events({
     'click #btnUrl': (e, t) => {
         let el = $('#inputUrl')[0];
@@ -23,7 +27,7 @@ Template.DocumentDetails.events({
 
 Template.DocumentDetails.helpers({
     getDocUrl() {
-        return Meteor.absoluteUrl(Router.current().url);
+        return Router.current().url;
     },
     isPublicSpace() {
         let folder = Folders.findOne(Router.current().params.folder_id);

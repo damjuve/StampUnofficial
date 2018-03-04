@@ -13,9 +13,9 @@
                     </span>
                     {{#if isPublicSpace}}
                         <div class="input-group mt-3">
-                            <input type="text" class="form-control input-url" id="inputUrl" value="{{getDocUrl}}" disabled>
-                            <span class="input-group-btn">
-                                <button class="btn btn-primary" id="btnUrl" type="button" data-toggle="tooltip" title="Partagez ce document en envoyant cette adresse">
+                            <input type="text" class="form-control input-url" id="inputUrl" value="{{getDocUrl}}" readonly>
+                            <span class="input-group-append">
+                                <button class="btn btn-primary" id="inputBtn" type="button" data-clipboard-target="#inputUrl" title="Partagez ce document en envoyant cette adresse">
                                     <i class="fas fa-clipboard"></i>
                                 </button>
                             </span>
