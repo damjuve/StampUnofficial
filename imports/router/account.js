@@ -27,13 +27,14 @@ Router.route('/signup', {
 });
 
 /* Reset password (from email) */
-Router.route('/reset-password', {
+Router.route('/reset-password/:token', {
     name: 'account.reset',
     onBeforeAction: function() {
         import '/imports/ui/pages/account/reset.js';
         this.next();
     },
     action: function() {
+        console.log("RESET ROUTE");
         this.layout('LayoutPublic');
         this.render('AccountReset');
     }

@@ -1,9 +1,7 @@
 import './reset.html';
 
 Template.AccountReset.onCreated(function () {
-    let query = Router.current().params["query"];
-
-    this.token = query.token;
+    this.token = Router.current().params.token;
     if (!this.token)
         Router.go("account.signin");
 })

@@ -53,3 +53,7 @@ Accounts.onCreateUser(function (options, user) {
     }
     return user;
 });
+
+Accounts.urls.resetPassword = function(token) {
+    return Meteor.absoluteUrl('reset-password/' + token);
+};

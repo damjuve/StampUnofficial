@@ -16,6 +16,7 @@ export const createVersion = function(docId, description, fileId, userId) {
     Files.update(fileId, {
         $set: {temporary: false}
     });
+    updateUservoteToVersion(versionId, true, userId);
     return versionId;
 };
 

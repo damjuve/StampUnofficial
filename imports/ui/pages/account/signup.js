@@ -60,12 +60,6 @@ Template.AccountSignup.events({
             else {
                 sAlert.success("Inscription réussie");
                 Router.go('account.signin');
-                /*Meteor.loginWithPassword(email, password, (err) => {
-                    if (err)
-                        console.error("loginWithPassword", err);
-                    else
-                        Router.go('home');
-                });*/
             }
         });
     },
