@@ -3,11 +3,17 @@
         <h1 class="text-center">Gestion de l'espace</h1>
         <div class="row">
             <div class="col-md-12">
-                <div class="float-right">
                     {{#if hasAdminRight}}
-                        {{> InviteSpace }}
+                    {{#if isPublicSpace}}
+                        <div class="text-center">
+                            <i>Impossible d'inviter des utilisateurs dans un espace public</i>
+                        </div>
+                    {{else}}
+                        <div class="float-right">
+                            {{> InviteSpace }}
+                        </div>
                     {{/if}}
-                </div>
+                    {{/if}}
             </div>
         </div>
         <table class="table mt-3">

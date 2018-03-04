@@ -1,3 +1,4 @@
+import { Spaces } from '/imports/api/space/space.js';
 import { Folders } from '../../../../api/folder/folder';
 import '../../user/inviteFolder/invite.js';
 import './users.css';
@@ -50,6 +51,14 @@ Template.FolderUsers.events({
 });
 
 Template.FolderUsers.helpers({
+    isPublicSpace() {
+        let folder = Folders.findOne(Router.current().params.folder_id);
+        let space = Spaces.findOne(folder.spaceId);
+        if (space) {
+            return space.public;
+        }
+        return false;
+    },
     folderName() {
         let folder = Folders.findOne(Router.current().params.folder_id);
         if (folder) {

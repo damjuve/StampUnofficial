@@ -7,3 +7,11 @@
     font-size: 14px;
     min-width: 70px;
 }
+
+.input-url {
+/*    max-width: 300px;*/
+}
+
+#btnUrl {
+    border-radius: 0px 5px 5px 0px;
+}

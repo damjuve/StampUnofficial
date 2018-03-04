@@ -8,6 +8,10 @@ Template.SpaceList.onCreated(function() {
     this.subscribe('space.my');
 });
 
+Template.SpaceList.onRendered(function () {
+    $('[data-toggle="tooltip"]').tooltip();
+});
+
 Template.SpaceList.events({
     'click .details-space': (e, t) => {
         e.preventDefault();
@@ -48,6 +52,7 @@ Template.SpaceList.events({
 
 Template.SpaceList.helpers({
     getNbUsers(space) {
+        console.log(space);
         if (space) {
             return space.users.length;
         }

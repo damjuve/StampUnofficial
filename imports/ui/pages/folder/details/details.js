@@ -79,15 +79,21 @@ Template.FolderDetails.events({
 Template.FolderDetails.helpers({
     getNbUsers() {
         let folder = Folders.findOne(Router.current().params.folder_id);
-        return folder.users.length;
+        if (folder)
+            return folder.users.length;
+        return 0;
     },
     getNbFolders() {
         let folder = Folders.findOne(Router.current().params.folder_id);
-        return folder.folders.length;
+        if (folder)
+            return folder.folders.length;
+        return 0;
     },
     getNbFiles() {
         let folder = Folders.findOne(Router.current().params.folder_id);
-        return folder.docs.length;
+        if (folder)
+            return folder.docs.length;
+        return 0;
     },
     currentFolder() {
         return Folders.findOne(Router.current().params.folder_id);

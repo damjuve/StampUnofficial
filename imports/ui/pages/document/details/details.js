@@ -2,6 +2,7 @@ import { Documents } from '/imports/api/document/document.js';
 import { Folders } from '/imports/api/folder/folder.js';
 import { Versions } from '/imports/api/version/version.js';
 import { Files } from '/imports/api/file/file.js';
+import { Spaces } from '/imports/api/space/space.js';
 import '../../version/create/create.js';
 import '../../version/details/details.js';
 import './details.css';
@@ -13,10 +14,25 @@ Template.DocumentDetails.onCreated(function() {
 });
 
 Template.DocumentDetails.events({
-
+    'click #btnUrl': (e, t) => {
+        let el = $('#inputUrl')[0];
+        el.select();
+        document.execCommand("copy");
+    }
 });
 
 Template.DocumentDetails.helpers({
+    getDocUrl() {
+        return Meteor.absoluteUrl(Router.current().url);
+    },
+    isPublicSpace() {
+        let folder = Folders.findOne(Router.current().params.folder_id);
+        let space = Spaces.findOne(folder.spaceId);
+        if (space) {
+            return space.public;
+        }
+        return false;
+    },
     getNbUsers() {
         let folder = Folders.findOne(Router.current().params.folder_id);
         if (folder) {

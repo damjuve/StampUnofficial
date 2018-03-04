@@ -10,10 +10,12 @@ Template.SpaceCreate.events({
         e.preventDefault();
         let target = e.target;
         let name = target.name.value;
+        let public = target.radioPublic.value;
+        public = (public == "public") ? true : false;
         if (name.trim().length < 3) {
             return sAlert.error("Entrez un nom de plus de 3 caractères")
         }
-        Meteor.call('space.create', name, (err, res) => {
+        Meteor.call('space.create', name, public, (err, res) => {
             if (err) {
                 console.log('err create', err);
                 sAlert.error(err.reason);

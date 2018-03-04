@@ -13,13 +13,14 @@ import { createInviteUser } from '../account/utils';
 import { updateFolderUserRight } from '../folder/utils.js';
 
 Meteor.methods({
-    'space.create': function(name) {
+    'space.create': function(name, public) {
         if (!Meteor.userId()) return false;
         check(name, String);
+        check(public, Boolean);
 
         if (name.trim().length < 3)
             throw new Meteor.Error('', 'Invalid name');
-        let spaceId = createSpace(name, Meteor.userId());
+        let spaceId = createSpace(name, Meteor.userId(), public);
         return spaceId;
     },
     'space.remove': function(spaceId) {
@@ -41,6 +42,9 @@ Meteor.methods({
 
         if (email == '' || !Isemail.validate(email))
             throw new Meteor.Error('', 'Invalid email');
+        let space = Spaces.findOne(spaceId);
+        if (!space || space.public)
+            throw new Meteor.Error('', 'Invalid space');
 
         let userId = inviteEmailToSpace(email, spaceId);
         return true;

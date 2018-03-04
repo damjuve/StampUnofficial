@@ -16,6 +16,23 @@
                     <div class="form-group">
                         <label for="name" class="form-control-label">Nom:</label>
                         <input type="text" class="form-control" id="name">
+                        <hr>
+                        <div class="form-check">
+                            <label class="form-check-label">
+                                <input class="form-check-input" type="radio" name="radioPublic" id="radioPrivate" value="private" checked>
+                                <i class="fas fa-lock" data-toggle="tooltip" title="Créer un espace privé"></i>&nbsp;
+                                <b>Espace Privé</b>
+                                <i class="ml-3">Les documents d'un espace privé ne sont accessible qu'au utilisateur invité dans l'espace</i>
+                            </label>
+                            </div>
+                            <div class="form-check">
+                            <label class="form-check-label">
+                                <input class="form-check-input" type="radio" name="radioPublic" id="radioPublic" value="public">
+                                <i class="fas fa-unlock" data-toggle="tooltip" title="Créer un espace privé"></i>&nbsp;
+                                <b>Espace Public</b>
+                                <i class="ml-3">Les documents d'un espace public sont accessible à tous via une simple url</i>
+                            </label>
+                        </div>
                     </div>
                 </div>
                 <div class="modal-footer">

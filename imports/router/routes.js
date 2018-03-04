@@ -34,7 +34,7 @@ Router.onBeforeAction(function () {
 ** Save original target in session
 */
 Router.onBeforeAction(function () {
-    if (!Meteor.userId()) {
+    if (!Meteor.userId() && this.route.getName() != "document.details") {
         Session.set('url_target', {
             url: this.url
         });

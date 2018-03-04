@@ -101,5 +101,13 @@ Template.FolderCreate.helpers({
     },
     selectedUsers() {
         return Template.instance().selectedUsers.get();
+    },
+    isPublicSpace() {
+        let folder = Folders.findOne(Router.current().params.folder_id);
+        let space = Spaces.findOne(folder.spaceId);
+        if (space) {
+            return space.public;
+        }
+        return false;
     }
 });

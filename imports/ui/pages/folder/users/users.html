@@ -6,11 +6,17 @@
         </h1>
         <div class="row">
             <div class="col-md-12">
-                <div class="float-right">
                     {{#if isFolderAdmin}}
-                        {{> InviteFolder }}
+                    {{#if isPublicSpace}}
+                        <div class="text-center">
+                            <i>Impossible d'inviter des utilisateurs dans un espace public</i>
+                        </div>
+                    {{else}}
+                        <div class="float-right">
+                            {{> InviteFolder }}
+                        </div>
                     {{/if}}
-                </div>
+                    {{/if}}
             </div>
         </div>
         <table class="table mt-3">

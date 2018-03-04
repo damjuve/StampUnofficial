@@ -11,6 +11,17 @@ import {
 import { createNotif } from '../notifications/utils.js';
 
 Meteor.methods({
+    'folder.isPublicSpace': function(folderId) {
+        console.log(folderId);
+        check(folderId, String);
+        let folder = Folders.findOne(folderId);
+        if (!folder)
+            return false;
+        let space = Spaces.findOne(folder.spaceId);
+        if (!space)
+            return false;
+        return space.public;
+    },
     'folder.create': function(folderId, name, users) {
         if (!Meteor.userId()) return false;
         check(name, String);

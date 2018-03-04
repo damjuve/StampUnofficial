@@ -41,8 +41,23 @@ Router.route('/folder/:folder_id/doc/:doc_id', {
         this.next();
     },
     action: function() {
-        this.layout('LayoutPrivate');
-        this.render('DocumentDetails');
+        if (!Meteor.userId()) {
+            Meteor.call('folder.isPublicSpace', this.params.folder_id, (err, res) => {
+                if (err)
+                    console.error(err);
+                else {
+                    if (res) {
+                        this.render('DocumentDetails');
+                    }
+                    else
+                        Router.go('account.signin');                            
+                }
+            });    
+        }
+        else {
+            this.layout('LayoutPrivate');
+            this.render('DocumentDetails');
+        }
     }
 });
 

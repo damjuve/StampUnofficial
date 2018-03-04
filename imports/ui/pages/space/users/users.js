@@ -59,6 +59,13 @@ Template.SpaceUsers.events({
 });
 
 Template.SpaceUsers.helpers({
+    isPublicSpace() {
+        let space = Spaces.findOne(Router.current().params.space_id);
+        if (space) {
+            return space.public;
+        }
+        return false;
+    },
     users() {
         let folder = Folders.findOne({spaceId: Router.current().params.space_id});
         if (folder) {
