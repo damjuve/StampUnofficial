@@ -38,8 +38,12 @@ Meteor.methods({
         let folder = Folders.findOne(folderId);
         if (!folder)
             throw new Meteor.Error('', 'Folder not found');
-        if (folder.userId != Meteor.userId())
-            throw new Meteor.Error('', 'You are not the owner');
+        let space = Spaces.findOne(folder.spaceId);
+        if (!space || !space.users)
+            throw new Meteor.Error('', 'Space not found');
+        let user = space.users.find(user => user.userId == Meteor.userId());
+        if (folder.userId != Meteor.userId() && !user.admin)
+            throw new Meteor.Error('', 'You are not authorized');
         removeFolder(folderId);
         return true;
     },
