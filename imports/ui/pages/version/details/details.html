@@ -109,7 +109,26 @@
                                     <tr>
                                         <td>{{getUsername user.userId}}</td>
                                         <td class="text-center">
-                                            <span class="badge {{getStatus 'badge' user.userId}} statusBadge"><i class="fa {{getStatus 'ico' user.userId}}"></i>&nbsp;{{getStatus 'title' user.userId}}</span>
+                                            {{#if isStatus user.userId 'ok'}}
+                                                <span class="badge badge-success statusBadge">
+                                                    <i class="fa fa-check-circle"></i>&nbsp;Validé
+                                                </span>
+                                            {{/if}}
+                                            {{#if isStatus user.userId 'ko'}}
+                                                <span class="badge badge-danger statusBadge">
+                                                    <i class='fa fa-times-circle'></i>&nbsp;Refusé
+                                                </span>
+                                            {{/if}}
+                                            {{#if isStatus user.userId 'notseen'}}
+                                                <span class="badge badge-secondary statusBadge">
+                                                    <i class="fa fa-eye-slash"></i>&nbsp;Pas vu
+                                                </span>
+                                            {{/if}}
+                                            {{#if isStatus user.userId 'waiting'}}
+                                                <span class="badge badge-primary statusBadge">
+                                                    <i class="fa fa-hourglass"></i>&nbsp;En attente
+                                                </span>
+                                            {{/if}}
                                         </td>
                                         <td class="text-center">
                                             {{#if hasCommented user.userId}}

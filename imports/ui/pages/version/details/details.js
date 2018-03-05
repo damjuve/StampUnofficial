@@ -189,44 +189,24 @@ Template.VersionDetails.helpers({
     currentVersion() {
         return Versions.findOne(Template.instance().data.versionId);
     },
-    getStatus(type, userId) {
+    isStatus(userId, type) {
         let version = Versions.findOne(Template.instance().data.versionId);
         if (version) {
             let userComment = version.comments.find((comment) => comment.userId == userId);
             if (!userComment) {
-                if (type == 'badge')
-                    return "badge-secondary";
-                if (type == 'ico')
-                    return "fa-eye-slash";
-                if (type == 'title')
-                    return "Pas vu";
+                return type == 'notseen';
             }
             if (userComment.accepted === undefined) {
-                if (type == 'badge')
-                    return "badge-primary";
-                if (type == 'ico')
-                    return "fa-hourglass";
-                if (type == 'title')
-                    return "En attente";
+                return type == 'waiting'
             }
             if (userComment.accepted) {
-                if (type == 'badge')
-                    return "badge-success";
-                if (type == 'ico')
-                    return "fa-check-circle";
-                if (type == 'title')
-                    return "Validé";
+                return type == 'ok'
             }
             else {
-                if (type == 'badge')
-                    return "badge-danger";
-                if (type == 'ico')
-                    return "fa-times-circle";
-                if (type == 'title')
-                    return "Refusé";
+                return type == 'ko'
             }
         }
-        return "";
+        return false;
     },
     hasAccepted(disabled) {
         let version = Versions.findOne(Template.instance().data.versionId);
